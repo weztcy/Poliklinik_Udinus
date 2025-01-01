@@ -55,6 +55,19 @@ if ($resultJumlahPasien) {
     $dataJumlah = mysqli_fetch_assoc($resultJumlahPasien);
     $jumlah_pasien_belum_diperiksa = $dataJumlah['jumlah_pasien_belum_diperiksa'];
 }
+
+// $queryJumlahPasien = "SELECT COUNT(DISTINCT pasien.id) AS jumlah_pasien
+//                       FROM daftar_poli
+//                       INNER JOIN pasien ON daftar_poli.id_pasien = pasien.id";
+
+// $resultJumlahPasien = mysqli_query($mysqli, $queryJumlahPasien);
+// $jumlah_pasien_belum_diperiksa = 0;
+
+// if ($resultJumlahPasien) {
+//     $dataJumlah = mysqli_fetch_assoc($resultJumlahPasien);
+//     $jumlah_pasien_belum_diperiksa = $dataJumlah['jumlah_pasien'];
+// }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
