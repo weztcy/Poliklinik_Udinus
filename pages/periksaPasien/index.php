@@ -95,7 +95,6 @@
     </div>
 </div>
 
-
                                         </div>
                                         <?php  } else { ?>
                                         <button type='button' class='btn btn-sm btn-info edit-btn' data-toggle="modal"
