@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: localhost:3306
--- Generation Time: Jan 01, 2025 at 11:06 AM
+-- Generation Time: Dec 31, 2024 at 05:21 PM
 -- Server version: 8.0.30
 -- PHP Version: 8.1.10
 
@@ -31,9 +31,9 @@ CREATE TABLE `daftar_poli` (
   `id` int UNSIGNED NOT NULL,
   `id_pasien` int UNSIGNED NOT NULL,
   `id_jadwal` int UNSIGNED NOT NULL,
-  `keluhan` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `keluhan` text COLLATE utf8mb4_general_ci NOT NULL,
   `no_antrian` int UNSIGNED NOT NULL,
-  `status_periksa` enum('0','1') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
+  `status_periksa` enum('0','1') COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -55,7 +55,7 @@ INSERT INTO `daftar_poli` (`id`, `id_pasien`, `id_jadwal`, `keluhan`, `no_antria
 (14, 22, 16, 'keluhan1', 3, '1'),
 (15, 28, 8, 'Maria Farida Wulandari 1\r\n', 4, '0'),
 (16, 28, 8, 'Maria Farida Wulandari 1', 5, '0'),
-(17, 28, 16, 'wwwwwwwwwww', 4, '1'),
+(17, 28, 16, 'wwwwwwwwwww', 4, '0'),
 (18, 32, 16, 'ssssssssssssss', 5, '0');
 
 -- --------------------------------------------------------
@@ -87,17 +87,10 @@ INSERT INTO `detail_periksa` (`id`, `id_periksa`, `id_obat`) VALUES
 (15, 8, 11),
 (16, 8, 12),
 (17, 8, 15),
-(27, 9, 13),
-(42, 11, 11),
-(43, 11, 13),
-(44, 11, 18),
-(45, 11, 40),
-(46, 11, 42),
-(47, 11, 45),
-(53, 10, 11),
-(54, 10, 12),
-(55, 10, 36),
-(56, 10, 44);
+(18, 9, 11),
+(19, 9, 15),
+(20, 9, 36),
+(21, 10, 35);
 
 -- --------------------------------------------------------
 
@@ -107,10 +100,10 @@ INSERT INTO `detail_periksa` (`id`, `id_periksa`, `id_obat`) VALUES
 
 CREATE TABLE `dokter` (
   `id` int NOT NULL,
-  `nama` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `password` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `alamat` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `no_hp` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `nama` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `password` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `alamat` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `no_hp` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
   `id_poli` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -142,10 +135,10 @@ INSERT INTO `dokter` (`id`, `nama`, `password`, `alamat`, `no_hp`, `id_poli`) VA
 CREATE TABLE `jadwal_periksa` (
   `id` int UNSIGNED NOT NULL,
   `id_dokter` int NOT NULL,
-  `hari` enum('Senin','Selasa','Rabu','Kamis','Jumat','Sabtu') CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `hari` enum('Senin','Selasa','Rabu','Kamis','Jumat','Sabtu') COLLATE utf8mb4_general_ci NOT NULL,
   `jam_mulai` time NOT NULL,
   `jam_selesai` time NOT NULL,
-  `aktif` char(1) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'N'
+  `aktif` char(1) COLLATE utf8mb4_general_ci NOT NULL DEFAULT 'N'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -174,8 +167,8 @@ INSERT INTO `jadwal_periksa` (`id`, `id_dokter`, `hari`, `jam_mulai`, `jam_seles
 
 CREATE TABLE `obat` (
   `id` int NOT NULL,
-  `nama_obat` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `kemasan` varchar(35) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `nama_obat` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `kemasan` varchar(35) COLLATE utf8mb4_general_ci NOT NULL,
   `harga` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -221,12 +214,12 @@ INSERT INTO `obat` (`id`, `nama_obat`, `kemasan`, `harga`) VALUES
 
 CREATE TABLE `pasien` (
   `id` int UNSIGNED NOT NULL,
-  `nama` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `password` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `alamat` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `no_ktp` varchar(255) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `no_hp` varchar(50) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `no_rm` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
+  `nama` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `password` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `alamat` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `no_ktp` varchar(255) COLLATE utf8mb4_general_ci NOT NULL,
+  `no_hp` varchar(50) COLLATE utf8mb4_general_ci NOT NULL,
+  `no_rm` varchar(25) COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -268,7 +261,7 @@ CREATE TABLE `periksa` (
   `id` int NOT NULL,
   `id_daftar_poli` int UNSIGNED NOT NULL,
   `tgl_periksa` datetime NOT NULL,
-  `catatan` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
+  `catatan` text COLLATE utf8mb4_general_ci NOT NULL,
   `biaya_periksa` int NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -283,8 +276,7 @@ INSERT INTO `periksa` (`id`, `id_daftar_poli`, `tgl_periksa`, `catatan`, `biaya_
 (7, 11, '2024-12-29 19:47:00', 'modaro', 182000),
 (8, 12, '2024-12-31 21:04:00', 'adsdsdsdsdsdsdsdsdsdsds', 240000),
 (9, 13, '2024-12-31 22:17:00', 'wakowoakwko', 215000),
-(10, 14, '2024-12-31 23:51:00', 'mmmmmmmmmm', 275000),
-(11, 17, '2025-01-01 16:25:00', 'mmmmmmmmmmmmm', 195000);
+(10, 14, '2024-12-31 23:51:00', 'mmmmmmmmmm', 225000);
 
 -- --------------------------------------------------------
 
@@ -294,8 +286,8 @@ INSERT INTO `periksa` (`id`, `id_daftar_poli`, `tgl_periksa`, `catatan`, `biaya_
 
 CREATE TABLE `poli` (
   `id` int NOT NULL,
-  `nama_poli` varchar(25) CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL,
-  `keterangan` text CHARACTER SET utf8mb4 COLLATE utf8mb4_general_ci NOT NULL
+  `nama_poli` varchar(25) COLLATE utf8mb4_general_ci NOT NULL,
+  `keterangan` text COLLATE utf8mb4_general_ci NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
@@ -383,7 +375,7 @@ ALTER TABLE `daftar_poli`
 -- AUTO_INCREMENT for table `detail_periksa`
 --
 ALTER TABLE `detail_periksa`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=57;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT for table `dokter`
@@ -413,7 +405,7 @@ ALTER TABLE `pasien`
 -- AUTO_INCREMENT for table `periksa`
 --
 ALTER TABLE `periksa`
-  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
+  MODIFY `id` int NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
 
 --
 -- AUTO_INCREMENT for table `poli`
