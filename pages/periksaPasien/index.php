@@ -34,7 +34,7 @@
                                         <button type='button' class='btn btn-sm btn-warning edit-btn'
                                             data-toggle="modal"
                                             data-target="#editModal<?php echo $data['id'] ?>">Edit</button>
-                                            <!-- Edit Modal -->
+<!-- Modal Edit Periksa -->
 <div class="modal fade" id="editModal<?php echo $data['id'] ?>" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
         <div class="modal-content">
@@ -45,62 +45,56 @@
                 </button>
             </div>
             <div class="modal-body">
-                <!-- Form Edit -->
+                <!-- Form tambah data obat disini -->
                 <?php
                     $idDaftarPoli = $data['id'];
                     require 'config/koneksi.php';
-                    $ambilDataPeriksa = mysqli_query($mysqli, "SELECT * FROM periksa INNER JOIN daftar_poli ON periksa.id_daftar_poli = daftar_poli.id WHERE daftar_poli.id = '$idDaftarPoli'");
+                    $ambilDataPeriksa = mysqli_query($mysqli,"SELECT * FROM periksa INNER JOIN daftar_poli ON periksa.id_daftar_poli = daftar_poli.id WHERE daftar_poli.id = '$idDaftarPoli'");
                     $ambilData = mysqli_fetch_assoc($ambilDataPeriksa);
                 ?>
                 <form action="pages/periksaPasien/editPeriksa.php" method="post">
                     <input type="hidden" name="id" value="<?php echo $data['id'] ?>">
-
                     <div class="form-group">
                         <label for="nama">Nama Pasien</label>
                         <input type="text" class="form-control" id="nama" name="nama" required value="<?php echo $data['nama'] ?>" readonly>
                     </div>
-                    
                     <div class="form-group">
                         <label for="tanggal_periksa">Tanggal Periksa</label>
                         <input type="datetime-local" class="form-control" id="tanggal_periksa" name="tanggal_periksa" required value="<?php echo $ambilData['tgl_periksa'] ?>">
                     </div>
-                    
                     <div class="form-group mb-3">
                         <label for="catatan">Catatan</label>
                         <textarea class="form-control" rows="3" id="catatan" name="catatan" required><?php echo $ambilData['catatan'] ?></textarea>
                     </div>
-
-                    <!-- Obat Section (Pre-select Obat yang sudah dipilih sebelumnya) -->
                     <div class="form-group mb-3">
                         <label>Obat</label>
                         <select class="select2" multiple="multiple" data-placeholder="Pilih Obat" style="width: 100%;" name="obat[]">
                             <?php
-                                $getObat = "SELECT * FROM obat";
-                                $queryObat = mysqli_query($mysqli, $getObat);
-                                
-                                // Ambil obat yang sudah dipilih untuk periksa ini
-                                $getObatDipilih = "SELECT id_obat FROM detail_periksa WHERE id_periksa = '{$ambilData['id']}'";
-                                $queryObatDipilih = mysqli_query($mysqli, $getObatDipilih);
-                                $obatDipilih = [];
-                                while ($row = mysqli_fetch_assoc($queryObatDipilih)) {
-                                    $obatDipilih[] = $row['id_obat'];
+                                // Ambil data obat yang sebelumnya dipilih
+                                $getObatTerpilih = "SELECT id_obat FROM detail_periksa WHERE id_periksa = (SELECT id FROM periksa WHERE id_daftar_poli = '$idDaftarPoli')";
+                                $queryObatTerpilih = mysqli_query($mysqli, $getObatTerpilih);
+                                $obatTerpilih = [];
+                                while ($obatData = mysqli_fetch_assoc($queryObatTerpilih)) {
+                                    $obatTerpilih[] = $obatData['id_obat'];
                                 }
 
-                                // Menampilkan semua obat dengan yang sudah dipilih
+                                // Tampilkan semua obat yang ada
+                                $getObat = "SELECT * FROM obat";
+                                $queryObat = mysqli_query($mysqli, $getObat);
                                 while ($datas = mysqli_fetch_assoc($queryObat)) {
-                                    $selected = in_array($datas['id'], $obatDipilih) ? 'selected' : '';
-                                    echo "<option value='{$datas['id']}' {$selected}>{$datas['nama_obat']}</option>";
+                                    $selected = in_array($datas['id'], $obatTerpilih) ? 'selected' : '';
+                                    echo "<option value='{$datas['id']}' $selected>{$datas['nama_obat']}</option>";
                                 }
                             ?>
                         </select>
                     </div>
-
                     <button type="submit" class="btn btn-success">Simpan</button>
                 </form>
             </div>
         </div>
     </div>
 </div>
+
 
                                         </div>
                                         <?php  } else { ?>
