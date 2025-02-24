@@ -17,7 +17,7 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
 
     // Eksekusi query
     if (mysqli_query($mysqli, $query)) {
-        // Jika berhasil, redirect kembali ke halaman index atau sesuaikan dengan kebutuhan Anda
+        // Jika berhasil, tampilkan pesan sukses dan arahkan kembali ke halaman obat.php
         echo '<script>';
         echo 'alert("Data obat berhasil diubah!");';
         echo 'window.location.href = "../../obat.php";';

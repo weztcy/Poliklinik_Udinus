@@ -5,12 +5,12 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Ambil nilai dari form
     $id = $_POST["id"];
 
-    // Query untuk melakukan update data obat
+    // Query untuk menghapus data pasien
     $query = "DELETE FROM pasien WHERE id = $id";
 
     // Eksekusi query
     if (mysqli_query($mysqli, $query)) {
-        // Jika berhasil, redirect kembali ke halaman index atau sesuaikan dengan kebutuhan Anda
+        // Jika berhasil, tampilkan pesan sukses dan arahkan kembali ke halaman pasien.php
         echo '<script>';
         echo 'alert("Data pasien berhasil dihapus!");';
         echo 'window.location.href = "../../pasien.php";';

@@ -1,16 +1,15 @@
-<!-- Main content -->
 <div class="content">
     <div class="container-fluid pt-4">
         <div class="row">
             <div class="col-12">
-                <!-- Tombol Tambah Obat -->
+                <!-- Tombol untuk membuka modal tambah obat -->
                 <div class="mb-3 d-flex justify-content-end">
                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addModal">
                         <i class="bi bi-plus-circle"></i> Tambah Obat
                     </button>
                 </div>
 
-                <!-- Modal Tambah Data Obat -->
+                <!-- Modal Tambah Obat -->
                 <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel"
                     aria-hidden="true">
                     <div class="modal-dialog" role="document">
@@ -57,12 +56,12 @@
                             </thead>
                             <tbody>
                                 <?php
-                                require 'config/koneksi.php';
+                                require 'config/koneksi.php';  // Menghubungkan ke database
                                 $no = 1;
-                                $query = "SELECT * FROM obat";
-                                $result = mysqli_query($mysqli, $query);
+                                $query = "SELECT * FROM obat";  // Mengambil data obat dari database
+                                $result = mysqli_query($mysqli, $query);  // Menjalankan query
 
-                                while ($data = mysqli_fetch_assoc($result)) {
+                                while ($data = mysqli_fetch_assoc($result)) {  // Menampilkan setiap data obat
                                 ?>
                                 <tr>
                                     <td><?php echo $no++; ?></td>
@@ -70,6 +69,7 @@
                                     <td><?php echo $data['kemasan']; ?></td>
                                     <td><?php echo $data['harga']; ?></td>
                                     <td>
+                                        <!-- Tombol untuk mengedit atau menghapus data obat -->
                                         <div class="d-flex justify-content-center">
                                             <button type="button" class="btn btn-warning btn-sm mx-1"
                                                 data-toggle="modal"
@@ -100,7 +100,7 @@
                                             <div class="modal-body">
                                                 <form action="pages/obat/updateObat.php" method="post">
                                                     <input type="hidden" name="id"
-                                                        value="<?php echo $data['id']; ?>">
+                                                        value="<?php echo $data['id']; ?>">  <!-- Menyimpan ID obat -->
                                                     <div class="form-group">
                                                         <label for="nama_obat">Nama Obat</label>
                                                         <input type="text" class="form-control" name="nama_obat"
@@ -138,7 +138,7 @@
                                             <div class="modal-body">
                                                 <form action="pages/obat/hapusObat.php" method="post">
                                                     <input type="hidden" name="id"
-                                                        value="<?php echo $data['id']; ?>">
+                                                        value="<?php echo $data['id']; ?>">  <!-- Menyimpan ID obat untuk dihapus -->
                                                     <p>Apakah Anda yakin ingin menghapus data
                                                         <strong><?php echo $data['nama_obat']; ?></strong>?</p>
                                                     <button type="submit" class="btn btn-danger">Hapus</button>
@@ -151,9 +151,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <!-- /.card-body -->
                 </div>
-                <!-- /.card -->
             </div>
         </div>
     </div>

@@ -7,7 +7,6 @@
                     <div class="card-header">
                         <h3 class="card-title">Daftar Riwayat Pasien</h3>
                     </div>
-                    <!-- /.card-header -->
 
                     <div class="card-body table-responsive p-0">
                         <table class="table table-hover text-nowrap">
@@ -27,7 +26,7 @@
                                 $no = 1;
                                 require 'config/koneksi.php';
 
-                                // Query untuk mengambil seluruh riwayat pasien
+                                // Query untuk mengambil riwayat pasien dengan status periksa '1'
                                 $query = "SELECT daftar_poli.status_periksa, periksa.id, pasien.alamat, pasien.id as idPasien, pasien.no_ktp, pasien.no_hp, pasien.no_rm, periksa.tgl_periksa, pasien.nama as namaPasien, dokter.nama, daftar_poli.keluhan, periksa.catatan, GROUP_CONCAT(obat.nama_obat) as namaObat, SUM(obat.harga) AS hargaObat 
                                           FROM detail_periksa 
                                           INNER JOIN periksa ON detail_periksa.id_periksa = periksa.id 
@@ -50,9 +49,11 @@
                                     <td><?php echo $data['no_hp']; ?></td>
                                     <td><?php echo $data['no_rm']; ?></td>
                                     <td>
+                                        <!-- Tombol untuk membuka modal riwayat pemeriksaan pasien -->
                                         <button type='button' class='btn btn-sm btn-info edit-btn' data-toggle="modal"
                                             data-target="#detailModal<?php echo $data['id'] ?>">Detail Riwayat Periksa</button>
 
+                                        <!-- Modal detail riwayat periksa -->
                                         <div class="modal fade" id="detailModal<?php echo $data['id'] ?>">
                                             <div class="modal-dialog modal-xl">
                                                 <div class="modal-content">
@@ -82,6 +83,8 @@
                                                                         $idPasien = $data['idPasien'];
                                                                         $nomor = 1;
                                                                         require 'config/koneksi.php';
+
+                                                                        // Query untuk mengambil riwayat periksa pasien berdasarkan ID
                                                                         $ambilData = "SELECT detail_periksa.id as idDetailPeriksa, periksa.tgl_periksa, pasien.nama as namaPasien, dokter.nama, daftar_poli.keluhan, periksa.catatan,
                                                                                     GROUP_CONCAT(obat.nama_obat) as namaObat,
                                                                                     periksa.biaya_periksa AS hargaObat 
@@ -94,6 +97,7 @@
                                                                                     INNER JOIN dokter ON jadwal_periksa.id_dokter = dokter.id 
                                                                                     WHERE pasien.id = '$idPasien' 
                                                                                     GROUP BY periksa.tgl_periksa";
+
                                                                         $results = mysqli_query($mysqli, $ambilData);
                                                                         while ($datas = mysqli_fetch_assoc($results)) {
                                                                     ?>
@@ -116,9 +120,7 @@
                                                             data-dismiss="modal">Close</button>
                                                     </div>
                                                 </div>
-                                                <!-- /.modal-content -->
                                             </div>
-                                            <!-- /.modal-dialog -->
                                         </div>
                                     </td>
                                 </tr>

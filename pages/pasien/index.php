@@ -66,10 +66,10 @@
                                 <?php
                                 require 'config/koneksi.php';
                                 $no = 1;
-                                $query = "SELECT * FROM pasien";
-                                $result = mysqli_query($mysqli, $query);
+                                $query = "SELECT * FROM pasien";  // Mengambil data pasien dari database
+                                $result = mysqli_query($mysqli, $query);  // Menjalankan query
 
-                                while ($data = mysqli_fetch_assoc($result)) {
+                                while ($data = mysqli_fetch_assoc($result)) {  // Menampilkan data pasien
                                 ?>
                                 <tr>
                                     <td><?php echo $no++; ?></td>
@@ -80,11 +80,13 @@
                                     <td><?php echo $data['no_rm']; ?></td>
                                     <td>
                                         <div class="d-flex justify-content-center">
+                                            <!-- Tombol Edit Pasien -->
                                             <button type="button" class="btn btn-warning btn-sm mx-1"
                                                 data-toggle="modal"
                                                 data-target="#editModal<?php echo $data['id']; ?>" style="width: 50%;">
                                                 <i class="bi bi-pencil-square"></i> Edit
                                             </button>
+                                            <!-- Tombol Hapus Pasien -->
                                             <button type="button" class="btn btn-danger btn-sm mx-1"
                                                 data-toggle="modal"
                                                 data-target="#hapusModal<?php echo $data['id']; ?>" style="width: 50%;">
@@ -165,9 +167,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <!-- /.card-body -->
                 </div>
-                <!-- /.card -->
             </div>
         </div>
     </div>

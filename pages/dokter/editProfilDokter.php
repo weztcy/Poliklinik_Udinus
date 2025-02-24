@@ -3,7 +3,7 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-12">
-                <!-- Button Edit Profil di luar card, kanan atas -->
+                <!-- Tombol Edit Profil -->
                 <div style="text-align: right; margin-bottom: 15px;">
                     <button 
                         type="button" 
@@ -17,7 +17,6 @@
 
                 <!-- Card untuk Tabel Data -->
                 <div class="card">
-                    <!-- Card Body dengan Tabel -->
                     <div class="card-body table-responsive p-0">
                         <table class="table table-hover table-bordered text-nowrap" style="width: 100%; table-layout: fixed;">
                             <colgroup>
@@ -25,7 +24,7 @@
                                 <col style="width: 50%;"> <!-- Kolom kedua -->
                             </colgroup>
                             <tbody>
-                                <!-- TAMPILKAN DATA Poli DI SINI -->
+                                <!-- Menampilkan data dokter -->
                                 <?php
                                 require 'config/koneksi.php';
 
@@ -50,12 +49,9 @@
                             </tbody>
                         </table>
                     </div>
-                    <!-- /.card-body -->
                 </div>
-                <!-- /.card -->
             </div>
         </div>
-        <!-- /.row -->
     </div><!-- /.container-fluid -->
 </div>
 <!-- /.content -->
@@ -71,10 +67,10 @@
                 </button>
             </div>
             <div class="modal-body">
-                <!-- Form edit data poli disini -->
+                <!-- Form edit data poli -->
                 <form action="pages/dokter/updateProfilDokter.php" method="post">
                     <?php
-                    // Ambil data pertama dari hasil query (karena tombol di atas tabel hanya berfungsi untuk satu dokter)
+                    // Ambil data dokter pertama kali untuk diisi dalam form
                     if ($result && mysqli_num_rows($result) > 0) {
                         mysqli_data_seek($result, 0); // Posisikan ulang ke baris pertama
                         $data = mysqli_fetch_assoc($result);

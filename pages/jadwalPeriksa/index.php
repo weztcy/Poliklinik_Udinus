@@ -134,7 +134,7 @@
                             </thead>
                             <tbody>
 
-                                <!-- TAMPILKAN DATA OBAT DI SINI -->
+                                <!-- TAMPILKAN JADWAL PERIKSA KHUSUS POLI -->
                                 <?php
                                 $no = 1;
                             require 'config/koneksi.php';
@@ -218,10 +218,10 @@
 
                     <!-- Form for Aktif -->
                     <div class="form-group">
-                        <label for="aktif">Aktif</label>
+                        <label for="aktif">Status</label>
                         <select class="form-control" id="aktif" name="aktif" required>
-                            <option value="Y" <?php echo $data['aktif'] == 'Y' ? 'selected' : ''; ?>>Ya</option>
-                            <option value="N" <?php echo $data['aktif'] == 'N' ? 'selected' : ''; ?>>Tidak</option>
+                            <option value="Y" <?php echo $data['aktif'] == 'Y' ? 'selected' : ''; ?>>Aktif</option>
+                            <option value="N" <?php echo $data['aktif'] == 'N' ? 'selected' : ''; ?>>Tidak Aktif</option>
                         </select>
                     </div>
 

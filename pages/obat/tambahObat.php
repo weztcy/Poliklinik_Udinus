@@ -10,13 +10,9 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
     // Query untuk menambahkan data obat ke dalam tabel
     $query = "INSERT INTO obat (nama_obat, kemasan, harga) VALUES ('$nama_obat', '$kemasan', '$harga')";
     
-
-    // if ($koneksi->query($query) === TRUE) {
     // Eksekusi query
     if (mysqli_query($mysqli, $query)) {
-        // Jika berhasil, redirect kembali ke halaman utama atau sesuaikan dengan kebutuhan Anda
-        // header("Location: ../../index.php");
-        // exit();
+        // Jika berhasil, tampilkan pesan sukses dan arahkan kembali ke halaman obat.php
         echo '<script>';
         echo 'alert("Data obat berhasil ditambahkan!");';
         echo 'window.location.href = "../../obat.php";';

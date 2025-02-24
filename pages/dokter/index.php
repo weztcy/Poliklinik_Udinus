@@ -2,14 +2,14 @@
     <div class="container-fluid pt-4">
         <div class="row">
             <div class="col-12">
-                <!-- Tombol Tambah Dokter Dikanan -->
+                <!-- Tombol untuk membuka modal tambah dokter -->
                 <div class="mb-3 d-flex justify-content-end">
                     <button type="button" class="btn btn-success" data-toggle="modal" data-target="#addModal">
                         <i class="bi bi-plus-circle"></i> Tambah Dokter
                     </button>
                 </div>
 
-                <!-- Modal Tambah Data Dokter -->
+                <!-- Modal untuk menambah dokter -->
                 <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel"
                     aria-hidden="true">
                     <div class="modal-dialog" role="document">
@@ -22,14 +22,14 @@
                             </div>
                             <div class="modal-body">
                                 <form action="pages/dokter/tambahDokter.php" method="post">
+                                    <!-- Form untuk input data dokter -->
                                     <div class="form-group">
                                         <label for="nama_dokter">Nama Dokter</label>
                                         <input type="text" class="form-control" id="nama_dokter" name="nama" required>
                                     </div>
                                     <div class="form-group">
                                         <label for="alamat">Alamat</label>
-                                        <textarea class="form-control" rows="3" id="alamat" name="alamat"
-                                            placeholder="Masukkan alamat" required></textarea>
+                                        <textarea class="form-control" rows="3" id="alamat" name="alamat" placeholder="Masukkan alamat" required></textarea>
                                     </div>
                                     <div class="form-group">
                                         <label for="no_hp">Nomor HP</label>
@@ -38,6 +38,7 @@
                                     <div class="form-group">
                                         <label for="poli">Poli</label>
                                         <select class="form-control" id="poli" name="poli" required>
+                                            <!-- Menampilkan list poli dari database -->
                                             <?php
                                             require 'config/koneksi.php';
                                             $query = "SELECT * FROM poli";
@@ -57,7 +58,7 @@
                     </div>
                 </div>
 
-                <!-- Tabel Data Dokter -->
+                <!-- Tabel untuk menampilkan data dokter -->
                 <div class="card">
                     <div class="card-body table-responsive p-0">
                         <table class="table table-hover text-nowrap">
@@ -75,7 +76,9 @@
                                 <?php
                                 require 'config/koneksi.php';
                                 $no = 1;
-                                $query = "SELECT dokter.id, dokter.nama, dokter.alamat, dokter.no_hp, poli.nama_poli FROM dokter INNER JOIN poli ON dokter.id_poli = poli.id";
+                                $query = "SELECT dokter.id, dokter.nama, dokter.alamat, dokter.no_hp, poli.nama_poli 
+                                          FROM dokter 
+                                          INNER JOIN poli ON dokter.id_poli = poli.id";
                                 $result = mysqli_query($mysqli, $query);
 
                                 while ($data = mysqli_fetch_assoc($result)) {
@@ -87,18 +90,17 @@
                                     <td><?php echo $data['no_hp']; ?></td>
                                     <td><?php echo $data['nama_poli']; ?></td>
                                     <td>
+                                        <!-- Tombol Edit dan Hapus untuk tiap dokter -->
                                         <div class="row">
                                             <div class="col-6">
                                                 <button type="button" class="btn btn-warning btn-sm btn-block"
-                                                    data-toggle="modal"
-                                                    data-target="#editModal<?php echo $data['id']; ?>">
+                                                    data-toggle="modal" data-target="#editModal<?php echo $data['id']; ?>">
                                                     <i class="bi bi-pencil-square"></i> Edit
                                                 </button>
                                             </div>
                                             <div class="col-6">
                                                 <button type="button" class="btn btn-danger btn-sm btn-block"
-                                                    data-toggle="modal"
-                                                    data-target="#hapusModal<?php echo $data['id']; ?>">
+                                                    data-toggle="modal" data-target="#hapusModal<?php echo $data['id']; ?>">
                                                     <i class="bi bi-trash3-fill"></i> Hapus
                                                 </button>
                                             </div>
@@ -107,35 +109,30 @@
                                 </tr>
 
                                 <!-- Modal Edit Dokter -->
-                                <div class="modal fade" id="editModal<?php echo $data['id']; ?>" tabindex="-1"
-                                    role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+                                <div class="modal fade" id="editModal<?php echo $data['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title">Edit Data Dokter</h5>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                    aria-label="Close">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
                                             <div class="modal-body">
                                                 <form action="pages/dokter/updateDokter.php" method="post">
-                                                    <input type="hidden" name="id"
-                                                        value="<?php echo $data['id']; ?>">
+                                                    <input type="hidden" name="id" value="<?php echo $data['id']; ?>">
+                                                    <!-- Form untuk edit data dokter -->
                                                     <div class="form-group">
                                                         <label for="nama">Nama Dokter</label>
-                                                        <input type="text" class="form-control" name="nama"
-                                                            value="<?php echo $data['nama']; ?>" required>
+                                                        <input type="text" class="form-control" name="nama" value="<?php echo $data['nama']; ?>" required>
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="alamat">Alamat</label>
-                                                        <textarea class="form-control" name="alamat" rows="3"
-                                                            required><?php echo $data['alamat']; ?></textarea>
+                                                        <textarea class="form-control" name="alamat" rows="3" required><?php echo $data['alamat']; ?></textarea>
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="no_hp">Nomor HP</label>
-                                                        <input type="text" class="form-control" name="no_hp"
-                                                            value="<?php echo $data['no_hp']; ?>" required>
+                                                        <input type="text" class="form-control" name="no_hp" value="<?php echo $data['no_hp']; ?>" required>
                                                     </div>
                                                     <div class="form-group">
                                                         <label for="poli">Poli</label>
@@ -146,8 +143,7 @@
                                                             while ($dataPoli = mysqli_fetch_assoc($resultPoli)) {
                                                                 $selected = $dataPoli['id'] == $data['id_poli'] ? 'selected' : '';
                                                             ?>
-                                                            <option value="<?php echo $dataPoli['id']; ?>"
-                                                                <?php echo $selected; ?>>
+                                                            <option value="<?php echo $dataPoli['id']; ?>" <?php echo $selected; ?>>
                                                                 <?php echo $dataPoli['nama_poli']; ?>
                                                             </option>
                                                             <?php } ?>
@@ -161,23 +157,19 @@
                                 </div>
 
                                 <!-- Modal Hapus Dokter -->
-                                <div class="modal fade" id="hapusModal<?php echo $data['id']; ?>" tabindex="-1"
-                                    role="dialog" aria-labelledby="hapusModalLabel" aria-hidden="true">
+                                <div class="modal fade" id="hapusModal<?php echo $data['id']; ?>" tabindex="-1" role="dialog" aria-labelledby="hapusModalLabel" aria-hidden="true">
                                     <div class="modal-dialog" role="document">
                                         <div class="modal-content">
                                             <div class="modal-header">
                                                 <h5 class="modal-title">Hapus Data Dokter</h5>
-                                                <button type="button" class="close" data-dismiss="modal"
-                                                    aria-label="Close">
+                                                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                                                     <span aria-hidden="true">&times;</span>
                                                 </button>
                                             </div>
                                             <div class="modal-body">
                                                 <form action="pages/dokter/hapusDokter.php" method="post">
-                                                    <input type="hidden" name="id"
-                                                        value="<?php echo $data['id']; ?>">
-                                                    <p>Apakah Anda yakin ingin menghapus data
-                                                        <strong><?php echo $data['nama']; ?></strong>?</p>
+                                                    <input type="hidden" name="id" value="<?php echo $data['id']; ?>">
+                                                    <p>Apakah Anda yakin ingin menghapus data <strong><?php echo $data['nama']; ?></strong>?</p>
                                                     <button type="submit" class="btn btn-danger">Hapus</button>
                                                 </form>
                                             </div>
@@ -188,9 +180,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <!-- /.card-body -->
                 </div>
-                <!-- /.card -->
             </div>
         </div>
     </div>

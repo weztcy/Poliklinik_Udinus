@@ -55,6 +55,7 @@
                                 <?php
                                 require 'config/koneksi.php';
                                 $no = 1;
+                                // Query untuk mengambil data poli
                                 $query = "SELECT * FROM poli";
                                 $result = mysqli_query($mysqli, $query);
 
@@ -66,11 +67,13 @@
                                     <td style="white-space: pre-line;"><?php echo $data['keterangan']; ?></td>
                                     <td>
                                         <div class="d-flex justify-content-center">
+                                            <!-- Tombol Edit Poli -->
                                             <button type="button" class="btn btn-warning btn-sm mx-1"
                                                 data-toggle="modal"
                                                 data-target="#editModal<?php echo $data['id']; ?>" style="width: 50%;">
                                                 <i class="bi bi-pencil-square"></i> Edit
                                             </button>
+                                            <!-- Tombol Hapus Poli -->
                                             <button type="button" class="btn btn-danger btn-sm mx-1"
                                                 data-toggle="modal"
                                                 data-target="#hapusModal<?php echo $data['id']; ?>" style="width: 50%;">
@@ -141,9 +144,7 @@
                             </tbody>
                         </table>
                     </div>
-                    <!-- /.card-body -->
                 </div>
-                <!-- /.card -->
             </div>
         </div>
     </div>

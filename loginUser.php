@@ -248,7 +248,7 @@
                         Masuk
                     </button>
                 </form>
-                <p class="text-right">Anda lupa password? <a href="" class="text-danger">Reset Password</a></p>
+                <!-- <p class="text-right">Anda lupa password? <a href="" class="text-danger">Reset Password</a></p> -->
             </div>
 
             <!-- Register Form -->

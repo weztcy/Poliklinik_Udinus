@@ -1,15 +1,16 @@
 <?php
 include("../../config/koneksi.php");
 
+// Memeriksa apakah form dikirim menggunakan metode POST
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Ambil nilai dari form
+    // Mengambil data dari form untuk diperbarui
     $id = $_POST["id"];
     $nama = $_POST["nama"];
     $alamat = $_POST["alamat"];
     $no_ktp = $_POST["no_ktp"];
     $no_hp = $_POST["no_hp"];
 
-    // Query untuk melakukan update data obat
+    // Menyusun query untuk memperbarui data pasien berdasarkan ID
     $query = "UPDATE pasien SET 
         nama = '$nama', 
         alamat = '$alamat', 
@@ -17,20 +18,20 @@ if ($_SERVER["REQUEST_METHOD"] == "POST") {
         no_hp = '$no_hp'
         WHERE id = '$id'";
 
-    // Eksekusi query
+    // Mengeksekusi query update
     if (mysqli_query($mysqli, $query)) {
-        // Jika berhasil, redirect kembali ke halaman index atau sesuaikan dengan kebutuhan Anda
+        // Jika berhasil, menampilkan pesan sukses dan redirect ke halaman pasien
         echo '<script>';
-        echo 'alert("Data obat berhasil diubah!");';
+        echo 'alert("Data pasien berhasil diubah!");';
         echo 'window.location.href = "../../pasien.php";';
         echo '</script>';
         exit();
     } else {
-        // Jika terjadi kesalahan, tampilkan pesan error
+        // Jika terjadi kesalahan, menampilkan pesan error
         echo "Error: " . $query . "<br>" . mysqli_error($mysqli);
     }
 }
 
-// Tutup koneksi
+// Menutup koneksi ke database
 mysqli_close($mysqli);
 ?>

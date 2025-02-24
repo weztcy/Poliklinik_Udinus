@@ -2,15 +2,15 @@
 include("../../config/koneksi.php");
 
 if ($_SERVER["REQUEST_METHOD"] == "POST") {
-    // Ambil nilai dari form
+    // Ambil nilai id dokter yang akan dihapus
     $id = $_POST["id"];
 
-    // Query untuk melakukan update data obat
+    // Query untuk menghapus data dokter berdasarkan ID
     $query = "DELETE FROM dokter WHERE id = $id";
 
     // Eksekusi query
     if (mysqli_query($mysqli, $query)) {
-        // Jika berhasil, redirect kembali ke halaman index atau sesuaikan dengan kebutuhan Anda
+        // Jika berhasil, tampilkan pesan sukses dan redirect ke halaman dokter
         echo '<script>';
         echo 'alert("Data dokter berhasil dihapus!");';
         echo 'window.location.href = "../../dokter.php";';
